@@ -1,0 +1,431 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sou",
+				"sourceSize() const	std::string"
+			],
+			[
+				"e",
+				"empty() const	bool"
+			],
+			[
+				"so",
+				"sourceSize() const	std::string"
+			],
+			[
+				"size",
+				"sizes"
+			],
+			[
+				"pri",
+				"printErrors()	void"
+			],
+			[
+				"is",
+				"isValid() const	bool"
+			],
+			[
+				"v",
+				"isVerbose() const	bool"
+			],
+			[
+				"pa",
+				"param_name	string"
+			],
+			[
+				"m_con",
+				"m_config_values	boost::program_options::variables_map"
+			],
+			[
+				"m_co",
+				"m_config_values	boost::program_options::variables_map"
+			],
+			[
+				"m_conf",
+				"m_config_values	boost::program_options::variables_map"
+			],
+			[
+				"m_c",
+				"m_config_values	boost::program_options::variables_map"
+			],
+			[
+				"m_",
+				"m_config_description	boost::program_options::options_description"
+			],
+			[
+				"option",
+				"options_description	class"
+			],
+			[
+				"va",
+				"variables_map	class"
+			],
+			[
+				"setQ",
+				"quality(const unsigned int quality_)	void"
+			],
+			[
+				"grea",
+				"greater<typename _Tp>	class"
+			],
+			[
+				"b",
+				"begin()	iterator"
+			],
+			[
+				"tv",
+				"tv_usec	__suseconds_t"
+			],
+			[
+				"tim",
+				"time_t	typedef"
+			],
+			[
+				"out",
+				"out_dir	fs::path"
+			],
+			[
+				"ve",
+				"verbose	bool"
+			],
+			[
+				"file",
+				"file_path	fs::path"
+			],
+			[
+				"rea",
+				"read(const std::string &imageSpec_)	void"
+			],
+			[
+				"inpu",
+				"input_iterator	fs::directory_iterator"
+			],
+			[
+				"dire",
+				"directory_iterator	class"
+			],
+			[
+				"ex",
+				"exists(const boost::filesystem3::path &p, system::error_code &ec)	bool"
+			],
+			[
+				"inclu",
+				"include_directories"
+			],
+			[
+				"fin",
+				"find_package"
+			],
+			[
+				"keep",
+				"keep_original"
+			],
+			[
+				"for",
+				"for	For Loop"
+			],
+			[
+				"str",
+				"string	typedef"
+			],
+			[
+				"parse_",
+				"parse_config_file(std::basic_istream<charT> &, const boost::program_options::options_description &)	basic_parsed_options<charT>"
+			],
+			[
+				"c",
+				"parse_command_line"
+			],
+			[
+				"h",
+				"hpp"
+			],
+			[
+				"pro",
+				"program_options"
+			],
+			[
+				"opti",
+				"options_description"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/main.cpp",
+			"settings":
+			{
+				"buffer_size": 3251,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 159.0,
+		"selected_items":
+		[
+			[
+				"Sublim",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"Subl",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"CM",
+				"Set Syntax: CMake"
+			],
+			[
+				"Pack",
+				"Package Control: List Packages"
+			],
+			[
+				"Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"",
+				"Package Control: Enable Package"
+			],
+			[
+				"Inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/ladoch/Projects/onlite/phresizer/src/Config.cpp",
+		"/home/ladoch/Projects/onlite/phresizer/src/Config.h",
+		"/home/ladoch/Projects/onlite/phresizer/CMakeLists.txt",
+		"/home/ladoch/Projects/onlite/phresizer/src/Config",
+		"/home/ladoch/Projects/onlite/phresizer/cmake/modules/FindGraphicsMagick.cmake",
+		"/home/ladoch/Projects/onlite/phresizer/phresizer.sublime-project",
+		"/usr/include/GraphicsMagick/Magick++.h",
+		"/usr/include/GraphicsMagick/Magick++/Include.h",
+		"/home/ladoch/.config/sublime-text-2/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/usr/include/boost/lexical_cast.hpp"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"    					",
+			"crop",
+			"const",
+			"\n#",
+			"conf",
+			"(\"--\") ",
+			"\");\n",
+			"\n    	",
+			"]);\n",
+			"      \n",
+			"\n#",
+			"\n",
+			"{\n",
+			"NULL",
+			"();",
+			" <",
+			"/usr/include/GraphicsMagick",
+			"include",
+			"Magick",
+			"using",
+			"VERBOSE_OPTION",
+			"<< ",
+			"\n	",
+			"	\n",
+			">();\n",
+			" \n",
+			"  ",
+			"OUTPUT_OPTION",
+			"<< ",
+			"ADD_SIZE_OPTION",
+			"\n}",
+			"	\n",
+			"\n	",
+			"	\n",
+			"};",
+			"};\n",
+			"string",
+			">((",
+			"parsers",
+			"wstring",
+			"wc_str",
+			"}\n",
+			"conf",
+			"}\n",
+			"string",
+			"(),",
+			"dsf",
+			"conf",
+			"char",
+			"path",
+			"parsers",
+			");\n",
+			"argv",
+			"parsers",
+			"cmdline",
+			"\n#",
+			"\n	",
+			">\n",
+			"program_options",
+			";\n",
+			"}",
+			"stdio",
+			"printf",
+			"\n	",
+			"int",
+			"!\");\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/main.cpp",
+					"settings":
+					{
+						"buffer_size": 3251,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 118.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 186.0,
+	"status_bar_visible": true
+}
