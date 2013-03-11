@@ -30,6 +30,11 @@ public:
 	 * @param size Resizing parameters.
 	 */
 	virtual bool resize(const std::string &dest, const Size &size) = 0;
+
+	/**
+	 * Writes exif info to specified file
+	 */
+	virtual bool writeExif(const std::string &dest) = 0;
 };
 
 #endif
