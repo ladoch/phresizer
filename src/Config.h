@@ -59,6 +59,11 @@ public:
 	bool isMetaEnabled() const;
 
 	/**
+	 * Is contents output enabled 
+	 */
+	bool isContentsEnabled() const;
+
+	/**
 	 * Source path
      */
     std::string source() const;
@@ -98,6 +103,7 @@ private:
 		static const char *VERBOSE;
 		static const char *SRC_SIZE;
 		static const char *META;
+		static const char *CONTENTS;
 	};
 
 	// Command

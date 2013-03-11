@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"c",
+				"c_str() const	const char *"
+			],
+			[
+				"conte",
+				"contents_file	fs::path"
+			],
+			[
+				"con",
+				"contents_path	fs::path"
+			],
+			[
+				"s",
+				"starts_with(const Range1T &Input, const Range2T &Test, PredicateT Comp)	bool"
+			],
+			[
+				"exi",
+				"exifValues	vector<string>"
+			],
+			[
+				"me",
+				"meta_path	fs::path"
+			],
+			[
+				"is",
+				"isMetaEnabled() const	bool"
+			],
+			[
+				"ios",
+				"ios_base	class"
+			],
+			[
 				"m_co",
 				"m_command	std::string"
 			],
@@ -78,10 +110,6 @@
 			[
 				"pri",
 				"printErrors()	void"
-			],
-			[
-				"is",
-				"isValid() const	bool"
 			],
 			[
 				"v",
@@ -176,10 +204,6 @@
 				"parse_config_file(std::basic_istream<charT> &, const boost::program_options::options_description &)	basic_parsed_options<charT>"
 			],
 			[
-				"c",
-				"parse_command_line"
-			],
-			[
 				"pro",
 				"program_options"
 			],
@@ -195,7 +219,15 @@
 			"file": "src/main.cpp",
 			"settings":
 			{
-				"buffer_size": 2872,
+				"buffer_size": 4295,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Size.cpp",
+			"settings":
+			{
+				"buffer_size": 3651,
 				"line_ending": "Unix"
 			}
 		},
@@ -224,13 +256,10 @@
 			}
 		},
 		{
-			"contents": "\n#include \"ImageResizerMagick.h\"\n\n#include <magick/api.h>\n\nusing namespace std;\n\n\n// Helper class for automatic GM initialization\nclass GraphicsMagickInitializer\n{\npublic:\n	GraphicsMagickInitializer()\n	{\n		Magick::InitializeMagick(NULL);\n	}\n\n	~GraphicsMagickInitializer() {}\n};\n\n// Initilize GM\nstatic GraphicsMagickInitializer gm_init;\n\n\n//-----------------------------------------------------------------------------\nImageResizerMagick::ImageResizerMagick(const string &source)\n	:m_source(source)\n{\n	m_prev = m_source;\n}\n\n//-----------------------------------------------------------------------------\nImageResizerMagick::ImageResizerMagick(const string &source, const string &size)\n	:m_source(size, source)\n{\n	m_prev = m_source;\n}\n\n//-----------------------------------------------------------------------------\nImageResizerMagick::~ImageResizerMagick()\n{\n\n}\n\n//-----------------------------------------------------------------------------\nbool ImageResizerMagick::resize(const std::string &dest, const Size &size)\n{\n	if (!size.usePrevious())\n	{\n		m_prev = m_source;\n	}\n\n	bool result;\n	if (size.mode() == Size::ResizeMode::FIT)\n	{\n		result = fit(size);\n	}\n	else if (size.mode() == Size::ResizeMode::STRETCH)\n	{\n		result = stretch(size);\n	}\n	else if (size.mode() == Size::ResizeMode::PAD)\n	{\n		result = pad(size);\n	}\n	else if (size.mode() == Size::ResizeMode::FILL_CROP)\n	{\n		result = crop(size);\n	}\n	else \n	{\n		result = false;\n	}\n\n	if (result)\n	{\n		m_prev.write(dest);\n	}\n\n	return result;\n}\n\n//-----------------------------------------------------------------------------\nbool ImageResizerMagick::fit(const Size &size)\n{\n	Magick::Geometry geometry(size.width(), size.height());\n	geometry.aspect(false);\n	geometry.greater(true);\n\n	if (!geometry.isValid())\n	{\n		return false;\n	}\n\n	m_prev.scale(geometry);\n	return true;\n}\n\n//-----------------------------------------------------------------------------\nbool ImageResizerMagick::stretch(const Size &size)\n{\n	Magick::Geometry geometry(size.width(), size.height());\n	geometry.aspect(true);\n	geometry.greater(true);\n\n	if (!geometry.isValid())\n	{\n		return false;\n	}\n\n	m_prev.scale(geometry);\n	return true;\n}\n\n//-----------------------------------------------------------------------------\nbool ImageResizerMagick::pad(const Size &size)\n{\n	Magick::Geometry geometry(size.width(), size.height());\n	geometry.aspect(false);\n	geometry.greater(true);\n\n	if (!geometry.isValid())\n	{\n		return false;\n	}\n\n	m_prev.scale(geometry);\n\n	Magick::Image background(geometry, Magick::Color(size.background()));	\n	background.composite(m_prev, Magick::CenterGravity, Magick::CopyCompositeOp);\n\n	m_prev = background;\n	return true;\n}\n\n//-----------------------------------------------------------------------------\nbool ImageResizerMagick::crop(const Size &size)\n{\n	Magick::Geometry sourceSize = m_prev.size();\n	Magick::Geometry cropSize(simaze.width(), size.height());\n	Magick::Geometry destSize;\n\n    double dx = (double)size.width() / sourceSize.width();\n    double dy = (double)size.height() / sourceSize.height();\n\n	if (dx > dy)\n	{\n		destSize.width(size.width());\n		destSize.height(sourceSize.height() * dx);\n		cropSize.yOff((destSize.height() - size.height()) / 2);		\n	}\n	else\n	{\n		destSize.height(size.height());\n		destSize.width(sourceSize.width() * dy);\n		cropSize.xOff((destSize.width() - size.width()) / 2);\n	}\n\n	m_prev.scale(destSize);\n	m_prev.crop(cropSize);	\n\n	return true;\n}\nmai",
 			"file": "src/ImageResizerMagick.cpp",
-			"file_size": 3410,
-			"file_write_time": 1362666970000000,
 			"settings":
 			{
-				"buffer_size": 3415,
+				"buffer_size": 4075,
 				"line_ending": "Unix"
 			}
 		},
@@ -238,7 +267,7 @@
 			"file": "src/ImageResizer.h",
 			"settings":
 			{
-				"buffer_size": 634,
+				"buffer_size": 738,
 				"line_ending": "Unix"
 			}
 		},
@@ -246,7 +275,7 @@
 			"file": "src/Config.cpp",
 			"settings":
 			{
-				"buffer_size": 4799,
+				"buffer_size": 5380,
 				"line_ending": "Unix"
 			}
 		},
@@ -254,7 +283,7 @@
 			"file": "src/ImageResizerMagick.h",
 			"settings":
 			{
-				"buffer_size": 996,
+				"buffer_size": 1096,
 				"line_ending": "Unix"
 			}
 		},
@@ -262,7 +291,7 @@
 			"file": "src/Config.h",
 			"settings":
 			{
-				"buffer_size": 1675,
+				"buffer_size": 1882,
 				"line_ending": "Unix"
 			}
 		}
@@ -355,9 +384,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			"*"
 		]
 	},
 	"find_state":
@@ -365,6 +395,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"it",
+			"\"exif",
+			"split",
 			"printErrors",
 			"ImageResizerGraphicsMagick",
 			"Magick::GravityType::CenterGravity",
@@ -455,7 +488,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -463,15 +496,15 @@
 					"file": "src/main.cpp",
 					"settings":
 					{
-						"buffer_size": 2872,
+						"buffer_size": 4295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								860,
-								860
+								0,
+								0
 							]
 						],
 						"settings":
@@ -481,13 +514,40 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 744.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "src/Size.cpp",
+					"settings":
+					{
+						"buffer_size": 3651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"file": "src/Version.h",
 					"settings":
 					{
@@ -513,7 +573,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "src/ImageResizer.cpp",
 					"settings":
 					{
@@ -530,7 +590,8 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -539,7 +600,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": ".gitignore",
 					"settings":
 					{
@@ -565,71 +626,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "src/ImageResizerMagick.cpp",
 					"settings":
 					{
-						"buffer_size": 3415,
+						"buffer_size": 4075,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2864,
-								2864
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2382.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/ImageResizer.h",
-					"settings":
-					{
-						"buffer_size": 634,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								450,
-								450
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "src/Config.cpp",
-					"settings":
-					{
-						"buffer_size": 4799,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4664,
-								4664
+								4075,
+								4075
 							]
 						],
 						"settings":
@@ -638,25 +647,79 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2686.0,
+						"translation.y": 2948.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "src/ImageResizerMagick.h",
+					"buffer": 6,
+					"file": "src/ImageResizer.h",
 					"settings":
 					{
-						"buffer_size": 996,
+						"buffer_size": 738,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								701,
-								701
+								625,
+								625
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 132.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/Config.cpp",
+					"settings":
+					{
+						"buffer_size": 5380,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3626,
+								3626
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1696.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/ImageResizerMagick.h",
+					"settings":
+					{
+						"buffer_size": 1096,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								731,
+								731
 							]
 						],
 						"settings":
@@ -671,27 +734,28 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "src/Config.h",
 					"settings":
 					{
-						"buffer_size": 1675,
+						"buffer_size": 1882,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1211,
-								1211
+								855,
+								855
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1292.0,
+						"translation.y": 752.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

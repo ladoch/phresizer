@@ -21,6 +21,7 @@ const char *Config::Options::CONF = "conf";
 const char *Config::Options::VERBOSE = "verbose";
 const char *Config::Options::SRC_SIZE = "src-size";
 const char *Config::Options::META = "meta";
+const char *Config::Options::CONTENTS = "contents";
 
 
 //-----------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Config::Config(int argc, char const*argv[])
 	    (Options::CONF, po::value<string>(), "read configuration form specified file")
 	    (Options::VERBOSE, "verbose output")
 	    (Options::META, "extract meta information from files and store in separate file")
+	    (Options::CONTENTS, "write output contents")
 	    (Options::SRC_SIZE, po::value<string>(), "hint to open file at reduced size");
 
 	po::store(po::parse_command_line(argc, argv, m_config_description), m_config_values);
@@ -117,6 +119,12 @@ bool Config::isVerbose() const
 bool Config::isMetaEnabled() const
 {
 	return m_config_values.count(Options::META) > 0;
+}
+
+//-----------------------------------------------------------------------------
+bool Config::isContentsEnabled() const
+{
+	return m_config_values.count(Options::CONTENTS) > 0;
 }
 
 //-----------------------------------------------------------------------------
