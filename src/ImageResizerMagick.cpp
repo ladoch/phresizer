@@ -1,9 +1,15 @@
 
 #include "ImageResizerMagick.h"
 
+#include <fstream>
+
 #include <magick/api.h>
 
+#include <boost/algorithm/string.hpp>
+
 using namespace std;
+
+namespace alg = boost::algorithm;
 
 
 // Helper class for automatic GM initialization
@@ -74,10 +80,42 @@ bool ImageResizerMagick::resize(const std::string &dest, const Size &size)
 
 	if (result)
 	{
+		m_prev.strip();
 		m_prev.write(dest);
 	}
 
 	return result;
+}
+
+//-----------------------------------------------------------------------------
+bool ImageResizerMagick::writeExif(const std::string &dest)
+{
+	try 
+	{
+		ofstream outs(dest.c_str(), ios::out);
+
+		string exif = m_source.attribute("EXIF:*");
+
+		vector<string> exifValues;
+		alg::split(exifValues, exif, alg::is_any_of("\n"));
+
+		for (int i = 0; i < exifValues.size(); ++i)
+		{
+			if (!alg::starts_with(exifValues[i], "MakerNote="))
+			{
+				outs << exifValues[i] << "\n";
+			}
+		}
+
+		outs.flush();
+
+		return true;
+	}
+	catch (...)
+	{
+		return false;
+	}
+
 }
 
 //-----------------------------------------------------------------------------

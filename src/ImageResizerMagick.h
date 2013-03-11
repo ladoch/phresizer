@@ -32,6 +32,11 @@ public:
 	 */
 	virtual bool resize(const std::string &dest, const Size &size);
 
+	/**
+	 * Writes exif info to specified file
+	 */
+	virtual bool writeExif(const std::string &dest);
+
 private:
 	// Resize with FIT strategy
 	bool fit(const Size &size);
