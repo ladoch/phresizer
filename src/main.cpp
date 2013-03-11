@@ -1,5 +1,6 @@
 
 #include <string>
+#include <fstream>
 #include <sys/time.h>
 
 #include <boost/filesystem.hpp>
@@ -77,7 +78,22 @@ int main(int argc, char const *argv[])
     {
     	// Make output path
 		fs::path out_dir = fs::path(conf.dest()) / sizes[i].alias();
-		fs::create_directories(out_dir);    	
+		fs::create_directories(out_dir);
+    }
+
+    fs::path meta_path = fs::path(conf.dest()) / "meta";
+    fs::path contents_path = fs::path(conf.dest()) / "contents";
+
+    if (conf.isMetaEnabled())
+    {
+        // Make exif meta path        
+        fs::create_directories(meta_path);
+    }
+
+    if (conf.isContentsEnabled())
+    {
+        // Make contents path        
+        fs::create_directories(contents_path);
     }
 
     double start = utcms();
@@ -102,14 +118,44 @@ int main(int argc, char const *argv[])
     	{
             // Create resizer
     		ImageResizer::AutoPtr resizer = ImageResizer::create(file_path, conf);
+            vector<string> contents;
+
+            if (conf.isMetaEnabled())
+            {
+                fs::path meta_file = meta_path / it->filename();
+                string meta = fs::absolute(meta_file).replace_extension(".exif").native();
+
+                // Add to contents
+                contents.push_back(string("meta=") + meta);
+
+                // Write exif infometa_file
+                resizer->writeExif(meta);
+            }
 
             for (int i = 0; i < sizes.size(); ++i)
             {
                 fs::path out_path = fs::path(conf.dest()) / sizes[i].alias() / it->filename();
                 string dest = fs::absolute(out_path).native();
 
+                // Add to contents
+                contents.push_back(sizes[i].alias() + "=" + dest);
+
                 // Resize
                 resizer->resize(dest, sizes[i]);
+            }
+
+            // Write contents
+            if (conf.isContentsEnabled())
+            {
+                fs::path contents_file = fs::absolute(contents_path / it->filename()).replace_extension(".cnt");
+
+                ofstream cnt_fstream(contents_file.native().c_str(), ios::out);
+                for (int i = 0; i < contents.size(); ++i)
+                {
+                    cnt_fstream << contents[i] << "\n";
+                }
+
+                cnt_fstream.flush();
             }
     	}
     	catch(std::runtime_error &ex) 
