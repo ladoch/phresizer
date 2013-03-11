@@ -54,6 +54,11 @@ public:
 	bool isVerbose() const;
 
 	/**
+	 * Is meta info output enabled 
+	 */
+	bool isMetaEnabled() const;
+
+	/**
 	 * Source path
      */
     std::string source() const;
@@ -92,6 +97,7 @@ private:
 		static const char *CONF;
 		static const char *VERBOSE;
 		static const char *SRC_SIZE;
+		static const char *META;
 	};
 
 	// Command

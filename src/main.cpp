@@ -77,7 +77,14 @@ int main(int argc, char const *argv[])
     {
     	// Make output path
 		fs::path out_dir = fs::path(conf.dest()) / sizes[i].alias();
-		fs::create_directories(out_dir);    	
+		fs::create_directories(out_dir);
+    }
+
+    if (conf.isMetaEnabled())
+    {
+        // Make exif meta path
+        fs::path meta_path = fs::path(conf.dest()) / "meta";
+        fs::create_directories(meta_path);
     }
 
     double start = utcms();
@@ -102,6 +109,14 @@ int main(int argc, char const *argv[])
     	{
             // Create resizer
     		ImageResizer::AutoPtr resizer = ImageResizer::create(file_path, conf);
+
+            if (conf.isMetaEnabled())
+            {
+                fs::path meta_path = fs::path(conf.dest()) / "meta" / it->filename() / ".exif";
+
+                // Write exif info
+                resizer->writeExif(fs::absolute(meta_path).native());
+            }
 
             for (int i = 0; i < sizes.size(); ++i)
             {

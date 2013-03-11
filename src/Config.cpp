@@ -20,6 +20,7 @@ const char *Config::Options::SIZE = "size";
 const char *Config::Options::CONF = "conf";
 const char *Config::Options::VERBOSE = "verbose";
 const char *Config::Options::SRC_SIZE = "src-size";
+const char *Config::Options::META = "meta";
 
 
 //-----------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Config::Config(int argc, char const*argv[])
 	    	"add resize operation, format:\n [a:<alias>,][m:fit|stretch|pad|crop,][b:<bgcolor>,][u:true|false,]s:<width>x<height>")
 	    (Options::CONF, po::value<string>(), "read configuration form specified file")
 	    (Options::VERBOSE, "verbose output")
+	    (Options::META, "extract meta information from files and store in separate file")
 	    (Options::SRC_SIZE, po::value<string>(), "hint to open file at reduced size");
 
 	po::store(po::parse_command_line(argc, argv, m_config_description), m_config_values);
@@ -109,6 +111,12 @@ void Config::printErrors()
 bool Config::isVerbose() const
 {
 	return m_config_values.count(Options::VERBOSE) > 0;
+}
+
+//-----------------------------------------------------------------------------
+bool Config::isMetaEnabled() const
+{
+	return m_config_values.count(Options::META) > 0;
 }
 
 //-----------------------------------------------------------------------------
